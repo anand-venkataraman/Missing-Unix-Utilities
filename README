@@ -7,22 +7,21 @@ colsort is strictly a filter. It sorts whitespace separated columns in alphabeti
  e.g. cat access_log | sed 's/&/ /g' | grep -i 'param1.*param2'
  You need this because User-Agents are notorious for haphazard param orderings.
 
+
 $ uniqify -h
 Uniqify: Print only first occurrence of each line regardless of input sort order, unlike uniq(1).
 
    Advantages over sort -u:
-    (1) Immediate output (2) Upto 2x faster (3) Typically, much smaller mem profile in non-count mode
+    (1) Immediate output (2) Upto 2x faster (3) Typically, much smaller mem profile
    Cons & Caveats:
-    (1) Uniqueness is upto MD5 of input (2) ~20% larger mem profile in count mode (3) Output is unsorted
+    (1) Uniqueness is upto MD5 of input (2) Output is unsorted (3) No count mode
 
-   Usage: cat infile.txt | uniqify [-c] [-q] [-f NUM] >outfile.txt
-     -c Prints counts for each input line (Count mode)
-     -q Suppress progress messages in count mode (ignored if not in count mode)
+   Usage: cat infile.txt | uniqify [-f NUM] >outfile.txt
      -f NUM uniqifies on field NUM only (not entire line)
 
    Notes: uniqify is designed along the lines of a Bloom filter (http://en.wikipedia.org/wiki/Bloom_filter)
-   and so there is a teeeeny chance of false-positives in tagging dupes. However, this behavior doesn't
-   occur in count mode (-c), which does exact counting in a map. uniqify -c is always correct.
+   and so there is a teeeeny chance of false-positives in tagging dupes.
+
 
 $ linecount -h
 Usage: linecount [-q] -tag STR -progress N
