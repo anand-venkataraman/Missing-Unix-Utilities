@@ -110,6 +110,9 @@ inline void printUniqs(int fnum) {
       if (storableMd5) {
 	memcpy(storableMd5, md5, 16);
 	alreadyPrinted.insert(storableMd5);
+      } else {
+        perror("malloc");
+        exit(1);
       }
     }
   }
