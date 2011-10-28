@@ -1,6 +1,24 @@
 I've written several utility scripts for Unix/Linux over the last decades. But these
 are a few of the ones I use often and have stood the test of time.
 
+Over the last several years, I've used these tools repeatedly, first at home with my 
+pet projects, later at SRI International, then at 33Across, my startup Infrinity, and 
+now at GetJar, which bought Infrinity.
+
+Together, these programs have saved me countless hours in sifting through 
+mountains of data for ad-hoc processing tasks. They have helped me do that in a fraction
+of the time it would have taken for someone to craft map-reduce or hadoop jobs to do 
+the same things.
+
+Although I am totally at home at the Unix command line, the conspicuous absence, 
+by default, of commands with these functionalities has always bugged me. I hope you find 
+these as useful as I have. 
+
+There are no Man pages - simply invoke these commands with a -h option and they will 
+print usage.
+
+& 
+
 $ colsort -h
 colsort is strictly a filter. It sorts whitespace separated columns in alphabetical order.
  Use it to ensure consistent ordering of data in a pipeline to match downstream regexes.
