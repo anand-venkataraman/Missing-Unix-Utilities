@@ -1,0 +1,33 @@
+I've written several utility scripts for Unix/Linux over the last decades. But these
+are a few of the ones I use often and have stood the test of time.
+
+$ colsort -h
+colsort is strictly a filter. It sorts whitespace separated columns in alphabetical order.
+ Use it to ensure consistent ordering of data in a pipeline to match downstream regexes.
+ e.g. cat access_log | sed 's/&/ /g' | grep -i 'param1.*param2'
+ You need this because User-Agents are notorious for haphazard param orderings.
+
+$ uniqify -h
+Uniqify: Print only first occurrence of each line regardless of input sort order, unlike uniq(1).
+
+   Advantages over sort -u:
+    (1) Immediate output (2) Upto 2x faster (3) Typically, much smaller mem profile in non-count mode
+   Cons & Caveats:
+    (1) Uniqueness is upto MD5 of input (2) ~20% larger mem profile in count mode (3) Output is unsorted
+
+   Usage: cat infile.txt | uniqify [-c] [-q] [-f NUM] >outfile.txt
+     -c Prints counts for each input line (Count mode)
+     -q Suppress progress messages in count mode (ignored if not in count mode)
+     -f NUM uniqifies on field NUM only (not entire line)
+
+   Notes: uniqify is designed along the lines of a Bloom filter (http://en.wikipedia.org/wiki/Bloom_filter)
+   and so there is a teeeeny chance of false-positives in tagging dupes. However, this behavior doesn't
+   occur in count mode (-c), which does exact counting in a map. uniqify -c is always correct.
+
+$ linecount -h
+Usage: linecount [-q] -tag STR -progress N
+  Simply pass lines through with same line progress every N lines
+  and a STR-tagged checkpoint every 10*N lines.
+  Use -q to eat input (strictly quiet counting mode)
+  For example try: seq 10000000 | linecount -tag Me -p 100000 >/dev/null
+  or equivalently: seq 10000000 | linecount -tag Me -q -p 100000
